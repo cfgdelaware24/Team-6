@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif; /* Updated to match theme */
 }
 
 body {
@@ -16,9 +16,9 @@ body {
 
 .quiz-container {
     background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    padding: 30px; /* Increased padding for a balanced look */
+    border-radius: 12px; /* Increased border radius for consistency */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Softer shadow for visual depth */
     width: 600px;
     max-width: 100%;
 }
@@ -26,6 +26,27 @@ body {
 h1 {
     text-align: center;
     margin-bottom: 20px;
+    color: #ba171a; /* Dark red color for title to match theme */
+    font-weight: 600;
+}
+.submit-btn {
+    grid-column: span 2;
+    display: block;
+    background-color: #ba171a; /* Updated button color to match theme */
+    color: white;
+    padding: 15px 20px;
+    font-size: 1.2em;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    margin: 30px auto 0 auto;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #a11218; /* Slightly darker shade on hover */
 }
 
 form {
@@ -34,54 +55,36 @@ form {
     gap: 20px;
 }
 
-.questions-left, .questions-right {
-    display: flex;
-    flex-direction: column;
-}
-
-.questions-left .question-block:last-child {
-    margin-top: auto;
-}
-
 .question-block {
-    background-color: #f9f9f9;
+    background-color: #D9D9D9; /* Light grey background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 15px;
+    border: 1px solid #dcdcdc;
+}
+
+.question-content {
+    background-color: #ffffff; 
     padding: 15px;
-    border-radius: 5px;
+    border-radius: 6px;
+}
+
+.question-label {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #333; 
     margin-bottom: 10px;
 }
 
-label {
-    font-size: 16px;
-    display: block;
-    margin-bottom: 8px;
+.options-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
 }
 
 input[type="radio"] {
     margin-right: 5px;
-    vertical-align: middle;
 }
 
-.question-block div label {
-    margin-right: 20px; 
-    vertical-align: middle;
-    display: inline-block;
-    line-height: 1;
-}
 
-.submit-btn {
-    grid-column: span 2;
-    display: block;
-    background-color: #d71921;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    margin: 20px auto 0 auto;
-}
-
-.submit-btn:hover {
-    background-color: #a11218;
-}
