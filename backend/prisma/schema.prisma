@@ -22,6 +22,7 @@ model User {
   phone         String
   Participant   Participant[]
   Volunteer     Volunteer[]
+  riskAssessmentResult String?
 }
 
 model Participant {
@@ -41,4 +42,10 @@ model Event {
   name        String
   time        DateTime
   description String
+}
+
+model RiskAssessmentQuestion {
+  question_id  Int     @id @default(autoincrement())
+  question     String
+  weight       Int
 }

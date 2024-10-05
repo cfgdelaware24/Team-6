@@ -36,6 +36,15 @@ CREATE TABLE "Event" (
     CONSTRAINT "Event_pkey" PRIMARY KEY ("event_id")
 );
 
+-- CreateTable
+CREATE TABLE "RiskAssessmentQuestion" (
+    "question_id" SERIAL NOT NULL,
+    "question" TEXT NOT NULL,
+    "weight" INTEGER NOT NULL,
+
+    CONSTRAINT "RiskAssessmentQuestion_pkey" PRIMARY KEY ("question_id")
+);
+
 -- AddForeignKey
 ALTER TABLE "Participant" ADD CONSTRAINT "Participant_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("user_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
