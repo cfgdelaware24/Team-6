@@ -3,45 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Account Page</title>
     <link rel="stylesheet" href="create_style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Heart in the Game</title>
 </head>
 <body>
     <div class="container">
         <header>
-            <img src="image1.jpeg" alt="Heart in the Game Logo" class="logo">
+            <img src="image1.jpeg" alt="Heart in the Game" class="logo">
         </header>
         <div class="content">
             <div class="create-account">
-                <h2>Create Account</h2>
+                <h2 class="section-title">Create Account</h2>
                 <form>
-                    <label for="phone">Enter Phone Number</label>
-                    <input type="tel" id="phone" name="phone" placeholder="Enter phone number" required>
-
-                    <label for="birthday">Enter Birthday (MM/DD/YYYY)</label>
-                    <input type="text" id="birthday" name="birthday" placeholder="MM/DD/YYYY" required>
-
-                    <label for="password">Create Password</label>
-                    <input type="password" id="password" name="password" placeholder="Create password" required>
-
-                    <label for="confirm-password">Confirm Password</label>
-                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password" required>
-
-                    <div class="checkbox-group">
-                        <label><input type="radio" name="role" value="volunteer"> Volunteer</label>
-                        <label><input type="radio" name="role" value="participant"> Participant</label>
+                    <div class="input-group">
+                        <label for="phone" class="form-label">Enter Phone Number</label>
+                        <input type="text" id="phone" class="form-input" placeholder="Enter phone number" required>
                     </div>
-                    
-                    <button type="submit" class="create-account-btn">Create Account</button>
-                    <p class="or">or</p>
-                    <button type="button" class="login-btn">Log in</button>
+                    <div class="input-group">
+                        <label for="birthday" class="form-label">Enter Birthday (MM/DD/YYYY)</label>
+                        <input type="text" id="birthday" class="form-input" placeholder="MM/DD/YYYY" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password" class="form-label">Create Password</label>
+                        <input type="password" id="password" class="form-input" placeholder="Create password" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="confirm-password" class="form-label">Confirm Password</label>
+                        <input type="password" id="confirm-password" class="form-input" placeholder="Confirm password" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Volunteer or Participant</label>
+                        <label for="volunteer">
+                            <input type="radio" id="volunteer" name="role" value="volunteer"> Volunteer
+                        </label>
+                        <label for="participant">
+                            <input type="radio" id="participant" name="role" value="participant"> Participant
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-create-account">Create Account</button>
+                    <p class="or-text">or</p>
+                    <button type="button" class="btn-login">Log in</button>
                 </form>
             </div>
             <div class="mission-statement">
-                <h2>Mission Statement</h2>
+                <h2 class="section-title">Mission Statement</h2>
                 <p>One in 300 youth has an undetected heart condition that puts them at risk for SCA. By providing screenings, we aim to improve survival from sudden cardiac arrest by educating the community on the importance and simplicity of bystander CPR.</p>
-                <!-- Replace the <img> with SVG -->
                 <svg
                     class="heart-icon"
                     width="50"
@@ -55,6 +61,9 @@
                         fill="black"
                     ></path>
                 </svg>
+                <div class="video-container">
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/9hW0EfqQpm4?si=gtS9mWnqlFOyjuRD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
             </div>
         </div>
     </div>
