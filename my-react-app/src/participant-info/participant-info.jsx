@@ -1,9 +1,11 @@
 import React from 'react';
 import './participant-info.css';
 
+const userId = localStorage.getItem('userId')
+
 function InformationDashboard() {
     return (
-        <div className="container" css={styles}>
+        <div className="container">
             <h1>Information</h1>
             <div className="info-grid">
                 <div className="box personal-info">
@@ -16,8 +18,8 @@ function InformationDashboard() {
                 <div className="box participant-info">
                     <h2>Participant Info</h2>
                     <p>EKG Status: YES/NO</p>
-                    <p>Participant ID: 111-1111-1111</p>
-                    <p>Volunteer ID: 111-1111-1111</p>
+                    <p>Participant ID: {userId}</p>
+                    <p>Volunteer ID: {userId}</p>
                 </div>
                 <div className="box test-results">
                     <h2>Test Results</h2>
