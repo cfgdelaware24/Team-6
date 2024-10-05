@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './firstquiz.css';
 import Results from './Results/Results';
-import Resultshealthy from '.Results/Resultshealthy'
+import Resultshealthy from './Results/Resultshealthy'
 
 const HealthQuiz = () => {
     const [questions, setQuestions] = useState([]);

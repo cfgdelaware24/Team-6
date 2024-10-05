@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import './style.css';
-
+import firstQuiz from './firstQuiz.jsx'
+import EventsDashboard from './events-dashboard/eventsdash';
+import CreateAccount from './create-acc/CreateAccount';
 
 const Registration = () => {
     const [isLogin, setIsLogin] = useState(true);
@@ -9,6 +12,7 @@ const Registration = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const history = useHistory();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -19,12 +23,18 @@ const Registration = () => {
                 // Login
                 const response = await axios.post('http://localhost:3000/api/auth/login', { username, password });
                 console.log('Login successful', response.data);
-                // Handle successful login (e.g., store token, redirect)
+
+                // Redirect based on role
+                if (response.data.role === 'participant') {
+                    return <firstQuiz/>;
+                } else if (response.data.role === 'volunteer') {
+                    return <EventsDashboard/>;
+                }
             } else {
                 // Register
-                const response = await axios.post('http://localhost:3000/api/auth/register', { username, email, password });
-                console.log('Registration successful', response.data);
-                // Handle successful registration (e.g., show success message, switch to login)
+                await axios.post('http://localhost:3000/api/auth/register', { username, email, password });
+                console.log('Registration successful');
+                return <CreateAccount/>;
             }
         } catch (err) {
             setError(err.response?.data?.error || 'An error occurred');
@@ -33,7 +43,9 @@ const Registration = () => {
 
     return (
         <div className="container">
-        
+            <header>
+                <img src={'./image1.jpeg'} alt="Heart in the Game" className="logo"/>
+            </header>
             <div className="content">
                 <div className="login">
                     <h2 className="section-title">{isLogin ? 'Login' : 'Create Account'}</h2>
