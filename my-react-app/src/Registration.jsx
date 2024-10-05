@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './style.css';
 
 const Registration = () => {
@@ -8,6 +9,7 @@ const Registration = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -17,13 +19,17 @@ const Registration = () => {
             if (isLogin) {
                 // Login
                 const response = await axios.post('http://localhost:3000/api/auth/login', { username, password });
-                console.log('Login successful', response.data);
-                // Handle successful login (e.g., store token, redirect)
+                const { token, userId } = response.data;
+                localStorage.setItem('token', token);
+                localStorage.setItem('userId', userId);
+                // Redirect to quiz page after successful login
+                navigate('/quiz');
             } else {
                 // Register
                 const response = await axios.post('http://localhost:3000/api/auth/register', { username, email, password });
                 console.log('Registration successful', response.data);
                 // Handle successful registration (e.g., show success message, switch to login)
+                setIsLogin(true);
             }
         } catch (err) {
             setError(err.response?.data?.error || 'An error occurred');
