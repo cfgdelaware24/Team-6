@@ -1,9 +1,12 @@
+import React from 'react';
+import Registration from './Registration';
 import './App.css';
+import './style.css';
 
 function App() {
   return (
     <div className="App">
-      react cleanup
+      <Registration/>
     </div>
   );
 }
