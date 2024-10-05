@@ -1,114 +1,62 @@
-body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: #f9f9f9;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account Page</title>
+    <link rel="stylesheet" href="create_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="image1.jpeg" alt="Heart in the Game Logo" class="logo">
+        </header>
+        <div class="content">
+            <div class="create-account">
+                <h2>Create Account</h2>
+                <form>
+                    <label for="phone">Enter Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter phone number" required>
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
+                    <label for="birthday">Enter Birthday (MM/DD/YYYY)</label>
+                    <input type="text" id="birthday" name="birthday" placeholder="MM/DD/YYYY" required>
 
-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
+                    <label for="password">Create Password</label>
+                    <input type="password" id="password" name="password" placeholder="Create password" required>
 
-.logo {
-    max-width: 150px;
-}
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password" required>
 
-.content {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    background-color: #ffffff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.create-account, .mission-statement {
-    flex: 1;
-    border: 1px solid #c0392b;
-    border-radius: 10px;
-    padding: 20px;
-    background-color: #fafafa;
-}
-
-.create-account h2, .mission-statement h2 {
-    font-weight: 700;
-    color: #c0392b;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-label {
-    font-weight: 500;
-    color: #333;
-}
-
-input[type="tel"],
-input[type="text"],
-input[type="password"] {
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.checkbox-group {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.create-account-btn,
-.login-btn {
-    background-color: #c0392b;
-    color: #fff;
-    padding: 10px;
-    font-size: 1rem;
-    font-weight: 700;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.create-account-btn:hover,
-.login-btn:hover {
-    background-color: #a12a20;
-}
-
-.or {
-    text-align: center;
-    font-weight: 500;
-    margin: 10px 0;
-}
-
-.mission-statement p {
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #333;
-    text-align: justify;
-}
-
-.mission-icon {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.heart-icon {
-    font-size: 2rem;
-    color: #c0392b;
-}
+                    <div class="checkbox-group">
+                        <label><input type="radio" name="role" value="volunteer"> Volunteer</label>
+                        <label><input type="radio" name="role" value="participant"> Participant</label>
+                    </div>
+                    
+                    <button type="submit" class="create-account-btn">Create Account</button>
+                    <p class="or">or</p>
+                    <button type="button" class="login-btn">Log in</button>
+                </form>
+            </div>
+            <div class="mission-statement">
+                <h2>Mission Statement</h2>
+                <p>One in 300 youth has an undetected heart condition that puts them at risk for SCA. By providing screenings, we aim to improve survival from sudden cardiac arrest by educating the community on the importance and simplicity of bystander CPR.</p>
+                <!-- Replace the <img> with SVG -->
+                <svg
+                    class="heart-icon"
+                    width="50"
+                    height="50"
+                    viewBox="0 0 150 150"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M125 106.25C128.583 106.25 131.604 107.5 134.062 110C136.521 112.5 137.729 115.417 137.687 118.75L87.4999 137.5L43.7499 125V68.75H55.9374L101.375 85.5625C104.625 86.8542 106.25 89.1875 106.25 92.5625C106.25 94.5208 105.542 96.2292 104.125 97.6875C102.708 99.1458 100.917 99.9167 98.7499 100H81.2499L70.3124 95.8125L68.2499 101.687L81.2499 106.25H125ZM99.9999 20.1875C104.417 15.0625 110.042 12.5 116.875 12.5C122.542 12.5 127.333 14.5833 131.25 18.75C135.167 22.9167 137.25 27.7083 137.5 33.125C137.5 37.4167 135.417 42.5417 131.25 48.5C127.083 54.4583 122.979 59.4375 118.937 63.4375C114.896 67.4375 108.583 73.375 99.9999 81.25C91.3332 73.375 84.9582 67.4375 80.8749 63.4375C76.7916 59.4375 72.6874 54.4583 68.5624 48.5C64.4374 42.5417 62.4166 37.4167 62.4999 33.125C62.4999 27.4583 64.5207 22.6667 68.5624 18.75C72.6041 14.8333 77.4791 12.75 83.1874 12.5C89.8541 12.5 95.4582 15.0625 99.9999 20.1875ZM6.1499 68.75H31.2499V137.5H6.1499V68.75Z"
+                        fill="black"
+                    ></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
