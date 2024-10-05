@@ -1,105 +1,85 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './firstquiz.css';
+import Results from './Results/Results';
+import Resultshealthy from '.Results/Resultshealthy'
 
 const HealthQuiz = () => {
+    const [questions, setQuestions] = useState([]);
+    const [answers, setAnswers] = useState([]);
+    const [result, setResult] = useState(null);
+    const userId = localStorage.getItem('userId')
+
+    useEffect(() => {
+        fetchQuestions();
+    }, []);
+
+    const fetchQuestions = async () => {
+        try {
+            const response = await axios.get('/api/risk-assessment/questions');
+            setQuestions(response.data);
+            setAnswers(new Array(response.data.length).fill(false));
+        } catch (error) {
+            console.error('Error fetching questions:', error);
+        }
+    };
+
+    const handleChange = (index, value) => {
+        const newAnswers = [...answers];
+        newAnswers[index] = value === 'yes';
+        setAnswers(newAnswers);
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('/api/questions', { userId, answers });
+            setResult(response.data);
+            renderResults()
+        } catch (error) {
+            console.error('Error submitting assessment:', error);
+        }
+    };
+
+    const renderResults = () => {
+        if (!result) return null;
+
+        if (result.assessment === "good") {
+            return <Resultshealthy result={"at risk"} />;
+        } else {
+            return <Results result={"healthy"} />;
+        }
+    };
+
     return (
         <div className="quiz-container">
-            <h1>Take Quiz Here</h1>
-            <form>
-                <div className="questions-left">
-                    <div className="question-block">
-                        <label>1. Do you experience chest pain?</label>
+            <h1>Heart Health Risk Assessment</h1>
+            <form onSubmit={handleSubmit}>
+                {questions.map((question, index) => (
+                    <div className="question-block" key={index}>
+                        <label>{index + 1}. {question.text}</label>
                         <div>
-                            <input type="radio" id="q1_yes" name="q1" value="yes" />
-                            <label htmlFor="q1_yes">Yes</label>
-                            <input type="radio" id="q1_no" name="q1" value="no" />
-                            <label htmlFor="q1_no">No</label>
+                            <input 
+                                type="radio" 
+                                id={`q${index}_yes`} 
+                                name={`q${index}`} 
+                                value="yes" 
+                                checked={answers[index] === true}
+                                onChange={() => handleChange(index, 'yes')}
+                            />
+                            <label htmlFor={`q${index}_yes`}>Yes</label>
+                            <input 
+                                type="radio" 
+                                id={`q${index}_no`} 
+                                name={`q${index}`} 
+                                value="no" 
+                                checked={answers[index] === false}
+                                onChange={() => handleChange(index, 'no')}
+                            />
+                            <label htmlFor={`q${index}_no`}>No</label>
                         </div>
                     </div>
-                    <div className="question-block">
-                        <label>2. Do you have a rapid or irregular heartbeat?</label>
-                        <div>
-                            <input type="radio" id="q2_yes" name="q2" value="yes" />
-                            <label htmlFor="q2_yes">Yes</label>
-                            <input type="radio" id="q2_no" name="q2" value="no" />
-                            <label htmlFor="q2_no">No</label>
-                        </div>
-                    </div>
-                    <div className="question-block">
-                        <label>3. Do you experience shortness of breath?</label>
-                        <div>
-                            <input type="radio" id="q3_yes" name="q3" value="yes" />
-                            <label htmlFor="q3_yes">Yes</label>
-                            <input type="radio" id="q3_no" name="q3" value="no" />
-                            <label htmlFor="q3_no">No</label>
-                        </div>
-                    </div>
-                    <div className="question-block">
-                        <label>4. Do you often feel dizzy?</label>
-                        <div>
-                            <input type="radio" id="q4_yes" name="q4" value="yes" />
-                            <label htmlFor="q4_yes">Yes</label>
-                            <input type="radio" id="q4_no" name="q4" value="no" />
-                            <label htmlFor="q4_no">No</label>
-                        </div>
-                    </div>
-                    <div className="question-block question5">
-                        <label>5. Do you experience unusual fatigue?</label>
-                        <div>
-                            <input type="radio" id="q5_yes" name="q5" value="yes" />
-                            <label htmlFor="q5_yes">Yes</label>
-                            <input type="radio" id="q5_no" name="q5" value="no" />
-                            <label htmlFor="q5_no">No</label>
-                        </div>
-                    </div>
-                </div>
-                <div className="questions-right">
-                    <div className="question-block">
-                        <label>6. Has your ability to exercise decreased recently?</label>
-                        <div>
-                            <input type="radio" id="q6_yes" name="q6" value="yes" />
-                            <label htmlFor="q6_yes">Yes</label>
-                            <input type="radio" id="q6_no" name="q6" value="no" />
-                            <label htmlFor="q6_no">No</label>
-                        </div>
-                    </div>
-                    <div className="question-block">
-                        <label>7. Do you have a family history of heart disease?</label>
-                        <div>
-                            <input type="radio" id="q7_yes" name="q7" value="yes" />
-                            <label htmlFor="q7_yes">Yes</label>
-                            <input type="radio" id="q7_no" name="q7" value="no" />
-                            <label htmlFor="q7_no">No</label>
-                        </div>
-                    </div>
-                    <div className="question-block">
-                        <label>8. Do you have diabetes?</label>
-                        <div>
-                            <input type="radio" id="q8_yes" name="q8" value="yes" />
-                            <label htmlFor="q8_yes">Yes</label>
-                            <input type="radio" id="q8_no" name="q8" value="no" />
-                            <label htmlFor="q8_no">No</label>
-                        </div>
-                    </div>
-                    <div className="question-block">
-                        <label>9. Are you over 60 years old?</label>
-                        <div>
-                            <input type="radio" id="q9_yes" name="q9" value="yes" />
-                            <label htmlFor="q9_yes">Yes</label>
-                            <input type="radio" id="q9_no" name="q9" value="no" />
-                            <label htmlFor="q9_no">No</label>
-                        </div>
-                    </div>
-                    <div className="question-block">
-                        <label>10. Do you smoke?</label>
-                        <div>
-                            <input type="radio" id="q10_yes" name="q10" value="yes" />
-                            <label htmlFor="q10_yes">Yes</label>
-                            <input type="radio" id="q10_no" name="q10" value="no" />
-                            <label htmlFor="q10_no">No</label>
-                        </div>
-                    </div>
-                </div>
+                ))}
                 <button type="submit" className="submit-btn">Submit</button>
             </form>
         </div>
