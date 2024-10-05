@@ -1,109 +1,99 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './firstquiz.css';
 
 const HealthQuiz = () => {
+    const [answers, setAnswers] = useState(Array(10).fill(''));
+
+    const handleChange = (index, value) => {
+        const newAnswers = [...answers];
+        newAnswers[index] = value;
+        setAnswers(newAnswers);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Answers:', answers);
+        // send to first model
+    };
+
     return (
         <div className="quiz-container">
             <h1>Take Quiz Here</h1>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="questions-left">
-                    <div className="question-block">
-                        <label>1. Do you experience chest pain?</label>
-                        <div>
-                            <input type="radio" id="q1_yes" name="q1" value="yes" />
-                            <label htmlFor="q1_yes">Yes</label>
-                            <input type="radio" id="q1_no" name="q1" value="no" />
-                            <label htmlFor="q1_no">No</label>
+                    {[1, 2, 3, 4, 5].map((num) => (
+                        <div className="question-block" key={num}>
+                            <label>{num}. {getQuestionText(num)}</label>
+                            <div>
+                                <input 
+                                    type="radio" 
+                                    id={`q${num}_yes`} 
+                                    name={`q${num}`} 
+                                    value="yes" 
+                                    checked={answers[num-1] === 'yes'}
+                                    onChange={() => handleChange(num-1, 'yes')}
+                                />
+                                <label htmlFor={`q${num}_yes`}>Yes</label>
+                                <input 
+                                    type="radio" 
+                                    id={`q${num}_no`} 
+                                    name={`q${num}`} 
+                                    value="no" 
+                                    checked={answers[num-1] === 'no'}
+                                    onChange={() => handleChange(num-1, 'no')}
+                                />
+                                <label htmlFor={`q${num}_no`}>No</label>
+                            </div>
                         </div>
-                    </div>
-                    <div className="question-block">
-                        <label>2. Do you have a rapid or irregular heartbeat?</label>
-                        <div>
-                            <input type="radio" id="q2_yes" name="q2" value="yes" />
-                            <label htmlFor="q2_yes">Yes</label>
-                            <input type="radio" id="q2_no" name="q2" value="no" />
-                            <label htmlFor="q2_no">No</label>
-                        </div>
-                    </div>
-                    <div className="question-block">
-                        <label>3. Do you experience shortness of breath?</label>
-                        <div>
-                            <input type="radio" id="q3_yes" name="q3" value="yes" />
-                            <label htmlFor="q3_yes">Yes</label>
-                            <input type="radio" id="q3_no" name="q3" value="no" />
-                            <label htmlFor="q3_no">No</label>
-                        </div>
-                    </div>
-                    <div className="question-block">
-                        <label>4. Do you often feel dizzy?</label>
-                        <div>
-                            <input type="radio" id="q4_yes" name="q4" value="yes" />
-                            <label htmlFor="q4_yes">Yes</label>
-                            <input type="radio" id="q4_no" name="q4" value="no" />
-                            <label htmlFor="q4_no">No</label>
-                        </div>
-                    </div>
-                    <div className="question-block question5">
-                        <label>5. Do you experience unusual fatigue?</label>
-                        <div>
-                            <input type="radio" id="q5_yes" name="q5" value="yes" />
-                            <label htmlFor="q5_yes">Yes</label>
-                            <input type="radio" id="q5_no" name="q5" value="no" />
-                            <label htmlFor="q5_no">No</label>
-                        </div>
-                    </div>
+                    ))}
                 </div>
                 <div className="questions-right">
-                    <div className="question-block">
-                        <label>6. Has your ability to exercise decreased recently?</label>
-                        <div>
-                            <input type="radio" id="q6_yes" name="q6" value="yes" />
-                            <label htmlFor="q6_yes">Yes</label>
-                            <input type="radio" id="q6_no" name="q6" value="no" />
-                            <label htmlFor="q6_no">No</label>
+                    {[6, 7, 8, 9, 10].map((num) => (
+                        <div className="question-block" key={num}>
+                            <label>{num}. {getQuestionText(num)}</label>
+                            <div>
+                                <input 
+                                    type="radio" 
+                                    id={`q${num}_yes`} 
+                                    name={`q${num}`} 
+                                    value="yes" 
+                                    checked={answers[num-1] === 'yes'}
+                                    onChange={() => handleChange(num-1, 'yes')}
+                                />
+                                <label htmlFor={`q${num}_yes`}>Yes</label>
+                                <input 
+                                    type="radio" 
+                                    id={`q${num}_no`} 
+                                    name={`q${num}`} 
+                                    value="no" 
+                                    checked={answers[num-1] === 'no'}
+                                    onChange={() => handleChange(num-1, 'no')}
+                                />
+                                <label htmlFor={`q${num}_no`}>No</label>
+                            </div>
                         </div>
-                    </div>
-                    <div className="question-block">
-                        <label>7. Do you have a family history of heart disease?</label>
-                        <div>
-                            <input type="radio" id="q7_yes" name="q7" value="yes" />
-                            <label htmlFor="q7_yes">Yes</label>
-                            <input type="radio" id="q7_no" name="q7" value="no" />
-                            <label htmlFor="q7_no">No</label>
-                        </div>
-                    </div>
-                    <div className="question-block">
-                        <label>8. Do you have diabetes?</label>
-                        <div>
-                            <input type="radio" id="q8_yes" name="q8" value="yes" />
-                            <label htmlFor="q8_yes">Yes</label>
-                            <input type="radio" id="q8_no" name="q8" value="no" />
-                            <label htmlFor="q8_no">No</label>
-                        </div>
-                    </div>
-                    <div className="question-block">
-                        <label>9. Are you over 60 years old?</label>
-                        <div>
-                            <input type="radio" id="q9_yes" name="q9" value="yes" />
-                            <label htmlFor="q9_yes">Yes</label>
-                            <input type="radio" id="q9_no" name="q9" value="no" />
-                            <label htmlFor="q9_no">No</label>
-                        </div>
-                    </div>
-                    <div className="question-block">
-                        <label>10. Do you smoke?</label>
-                        <div>
-                            <input type="radio" id="q10_yes" name="q10" value="yes" />
-                            <label htmlFor="q10_yes">Yes</label>
-                            <input type="radio" id="q10_no" name="q10" value="no" />
-                            <label htmlFor="q10_no">No</label>
-                        </div>
-                    </div>
+                    ))}
                 </div>
                 <button type="submit" className="submit-btn">Submit</button>
             </form>
         </div>
     );
 };
+
+function getQuestionText(num) {
+    const questions = [
+        "Do you experience chest pain?",
+        "Do you have a rapid or irregular heartbeat?",
+        "Do you experience shortness of breath?",
+        "Do you often feel dizzy?",
+        "Do you experience unusual fatigue?",
+        "Has your ability to exercise decreased recently?",
+        "Do you have a family history of heart disease?",
+        "Do you have diabetes?",
+        "Are you over 60 years old?",
+        "Do you smoke?"
+    ];
+    return questions[num - 1];
+}
 
 export default HealthQuiz;
