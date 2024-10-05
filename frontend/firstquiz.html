@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Heart in the Game</title>
+    <title>Health Quiz</title>
+    <link rel="stylesheet" href="firstquiz.css">
 </head>
 <body>
     <div class="quiz-container">
         <h1>Take Quiz Here</h1>
         <form>
-            <div class="questions">
+            <div class="questions-left">
                 <div class="question-block">
                     <label>1. Do you experience chest pain?</label>
                     <div>
@@ -47,7 +47,7 @@
                         <label for="q4_no">No</label>
                     </div>
                 </div>
-                <div class="question-block">
+                <div class="question-block question5">
                     <label>5. Do you experience unusual fatigue?</label>
                     <div>
                         <input type="radio" id="q5_yes" name="q5" value="yes">
@@ -56,6 +56,8 @@
                         <label for="q5_no">No</label>
                     </div>
                 </div>
+            </div>
+            <div class="questions-right">
                 <div class="question-block">
                     <label>6. Has your ability to exercise decreased recently?</label>
                     <div>
@@ -106,3 +108,4 @@
         </form>
     </div>
 </body>
+</html>
