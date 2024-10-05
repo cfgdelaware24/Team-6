@@ -5,7 +5,6 @@ const {
     findUserByUsername,
     findUserByEmail,
     updateUserPasswordByUsername,
-    updateUserTopics,
     getUserById
 } = require("../Model/authModel");
 
@@ -82,33 +81,6 @@ const forgotPassword = async (req, res) => {
     } catch (error) {
         console.error("Password reset error:", error);
         res.status(500).json({ error: "Password reset failed" });
-    }
-};
-
-const saveTopics = async (req, res) => {
-    const { userId, topics } = req.body;
-
-    try {
-        const user = await updateUserTopics(userId, topics);
-        res.status(200).json({ message: "Topics saved successfully", user });
-    } catch (error) {
-        console.error("Failed to save topics:", error);
-        res.status(500).json({ error: "Failed to save topics" });
-    }
-};
-
-const getTopics = async (req, res) => {
-    const { userId } = req.params;
-
-    try {
-        const user = await getUserById(userId);
-        if (!user) {
-            return res.status(404).json({ error: "User not found" });
-        }
-        res.status(200).json({ topics: user.topics, hasCompletedTopics: user.hasCompletedTopics });
-    } catch (error) {
-        console.error("Failed to retrieve topics:", error);
-        res.status(500).json({ error: "Failed to retrieve topics" });
     }
 };
 

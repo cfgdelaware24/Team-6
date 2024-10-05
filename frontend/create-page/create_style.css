@@ -1,0 +1,116 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    max-width: 150px;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.create-account, .mission-statement {
+    flex: 1;
+    border: 1px solid #c0392b;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #fafafa;
+}
+
+.create-account h2, .mission-statement h2 {
+    font-weight: 700;
+    color: #c0392b;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-weight: 500;
+    color: #333;
+}
+
+input[type="tel"],
+input[type="text"],
+input[type="password"] {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.checkbox-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.create-account-btn,
+.login-btn {
+    background-color: #c0392b;
+    color: #fff;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.create-account-btn:hover,
+.login-btn:hover {
+    background-color: #a12a20;
+}
+
+.or {
+    text-align: center;
+    font-weight: 500;
+    margin: 10px 0;
+}
+
+.mission-statement p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+    text-align: justify;
+}
+
+.mission-icon {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.heart-icon {
+  display: block;
+  margin: 20px auto; 
+  width: 50px;
+  height: 50px;
+}
