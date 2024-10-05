@@ -37,21 +37,9 @@ const updateUserPasswordByUsername = async (username, newPassword) => {
     });
 };
 
-const updateUserTopics = async (userId, topics) => {
-    return await prisma.user.update({
-        where: { userID: parseInt(userId) },
-        data: { topics: { set: topics }, hasCompletedTopics: true },
-    });
-};
-
 const getUserById = async (userId) => {
     return await prisma.user.findUnique({
         where: { userID: parseInt(userId) },
-        include: {
-            Conversations: true,
-            ChatbotInteractions: true,
-            Widgets: true,
-        },
     });
 };
 
@@ -63,13 +51,6 @@ const getAllUsers = async () => {
             firstName: true,
             lastName: true,
         },
-    });
-};
-
-const saveRiskAssessmentResult = async (userId, result) => {
-    return await prisma.user.update({
-        where: { userID: parseInt(userId) },
-        data: { riskAssessmentResult: result },
     });
 };
 

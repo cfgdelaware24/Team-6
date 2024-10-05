@@ -5,6 +5,7 @@ require('dotenv').config();
 
 const authRoutes = require('./Routes/authRoutes');
 const riskAssessmentRoutes = require('./Routes/chatRoutes');
+const eventsRoutes = require('./src/controllers');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -17,6 +18,7 @@ app.use(express.json());
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/risk-assessment', riskAssessmentRoutes);
+app.use('/api/events', riskAssessmentRoutes);
 
 // Basic route
 app.get('/', (req, res) => {
