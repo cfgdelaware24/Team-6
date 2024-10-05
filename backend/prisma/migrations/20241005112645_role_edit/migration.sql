@@ -1,29 +1,16 @@
 -- CreateTable
 CREATE TABLE "User" (
     "user_id" SERIAL NOT NULL,
+    "username" TEXT NOT NULL,
     "password_hash" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "age" INTEGER NOT NULL,
     "email" TEXT NOT NULL,
     "phone" TEXT NOT NULL,
+    "role" TEXT NOT NULL,
+    "riskAssessmentResult" TEXT,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("user_id")
-);
-
--- CreateTable
-CREATE TABLE "Participant" (
-    "participant_id" SERIAL NOT NULL,
-    "user_id" INTEGER NOT NULL,
-
-    CONSTRAINT "Participant_pkey" PRIMARY KEY ("participant_id")
-);
-
--- CreateTable
-CREATE TABLE "Volunteer" (
-    "volunteer_id" SERIAL NOT NULL,
-    "user_id" INTEGER NOT NULL,
-
-    CONSTRAINT "Volunteer_pkey" PRIMARY KEY ("volunteer_id")
 );
 
 -- CreateTable
@@ -45,8 +32,8 @@ CREATE TABLE "RiskAssessmentQuestion" (
     CONSTRAINT "RiskAssessmentQuestion_pkey" PRIMARY KEY ("question_id")
 );
 
--- AddForeignKey
-ALTER TABLE "Participant" ADD CONSTRAINT "Participant_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("user_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+-- CreateIndex
+CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 
--- AddForeignKey
-ALTER TABLE "Volunteer" ADD CONSTRAINT "Volunteer_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("user_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+-- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
