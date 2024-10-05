@@ -1,99 +1,85 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './firstquiz.css';
 
 const HealthQuiz = () => {
-    const [answers, setAnswers] = useState(Array(10).fill(''));
+    const [questions, setQuestions] = useState([]);
+    const [answers, setAnswers] = useState([]);
+    const [result, setResult] = useState(null);
+    const userId = 'user-id-here'; // query userID from db, NEED TO CHANGE
+
+    useEffect(() => {
+        fetchQuestions();
+    }, []);
+
+    const fetchQuestions = async () => {
+        try {
+            const response = await axios.get('/api/risk-assessment');
+            setQuestions(response.data);
+            setAnswers(new Array(response.data.length).fill(false));
+        } catch (error) {
+            console.error('Error fetching questions:', error);
+        }
+    };
 
     const handleChange = (index, value) => {
         const newAnswers = [...answers];
-        newAnswers[index] = value;
+        newAnswers[index] = value === 'yes';
         setAnswers(newAnswers);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Answers:', answers);
-        // send to first model
+        try {
+            const response = await axios.post('/api/risk-assessment', { userId, answers });
+            setResult(response.data);
+        } catch (error) {
+            console.error('Error submitting assessment:', error);
+        }
     };
 
     return (
         <div className="quiz-container">
-            <h1>Take Quiz Here</h1>
+            <h1>Heart Health Risk Assessment</h1>
             <form onSubmit={handleSubmit}>
-                <div className="questions-left">
-                    {[1, 2, 3, 4, 5].map((num) => (
-                        <div className="question-block" key={num}>
-                            <label>{num}. {getQuestionText(num)}</label>
-                            <div>
-                                <input 
-                                    type="radio" 
-                                    id={`q${num}_yes`} 
-                                    name={`q${num}`} 
-                                    value="yes" 
-                                    checked={answers[num-1] === 'yes'}
-                                    onChange={() => handleChange(num-1, 'yes')}
-                                />
-                                <label htmlFor={`q${num}_yes`}>Yes</label>
-                                <input 
-                                    type="radio" 
-                                    id={`q${num}_no`} 
-                                    name={`q${num}`} 
-                                    value="no" 
-                                    checked={answers[num-1] === 'no'}
-                                    onChange={() => handleChange(num-1, 'no')}
-                                />
-                                <label htmlFor={`q${num}_no`}>No</label>
-                            </div>
+                {questions.map((question, index) => (
+                    <div className="question-block" key={index}>
+                        <label>{index + 1}. {question.text}</label>
+                        <div>
+                            <input 
+                                type="radio" 
+                                id={`q${index}_yes`} 
+                                name={`q${index}`} 
+                                value="yes" 
+                                checked={answers[index] === true}
+                                onChange={() => handleChange(index, 'yes')}
+                            />
+                            <label htmlFor={`q${index}_yes`}>Yes</label>
+                            <input 
+                                type="radio" 
+                                id={`q${index}_no`} 
+                                name={`q${index}`} 
+                                value="no" 
+                                checked={answers[index] === false}
+                                onChange={() => handleChange(index, 'no')}
+                            />
+                            <label htmlFor={`q${index}_no`}>No</label>
                         </div>
-                    ))}
-                </div>
-                <div className="questions-right">
-                    {[6, 7, 8, 9, 10].map((num) => (
-                        <div className="question-block" key={num}>
-                            <label>{num}. {getQuestionText(num)}</label>
-                            <div>
-                                <input 
-                                    type="radio" 
-                                    id={`q${num}_yes`} 
-                                    name={`q${num}`} 
-                                    value="yes" 
-                                    checked={answers[num-1] === 'yes'}
-                                    onChange={() => handleChange(num-1, 'yes')}
-                                />
-                                <label htmlFor={`q${num}_yes`}>Yes</label>
-                                <input 
-                                    type="radio" 
-                                    id={`q${num}_no`} 
-                                    name={`q${num}`} 
-                                    value="no" 
-                                    checked={answers[num-1] === 'no'}
-                                    onChange={() => handleChange(num-1, 'no')}
-                                />
-                                <label htmlFor={`q${num}_no`}>No</label>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                    </div>
+                ))}
                 <button type="submit" className="submit-btn">Submit</button>
             </form>
+            {result && (
+                <div className="result">
+                    <h2>Assessment Result</h2>
+                    <p>Risk Level: {result.assessment}</p>
+                    <p>Risk Percentage: {result.riskPercentage}%</p>
+                    <p>EKG Recommendation: {result.ekgRecommendation}</p>
+                    <div dangerouslySetInnerHTML={{ __html: result.advice }} />
+                </div>
+            )}
         </div>
     );
 };
-
-function getQuestionText(num) {
-    const questions = [
-        "Do you experience chest pain?",
-        "Do you have a rapid or irregular heartbeat?",
-        "Do you experience shortness of breath?",
-        "Do you often feel dizzy?",
-        "Do you experience unusual fatigue?",
-        "Has your ability to exercise decreased recently?",
-        "Do you have a family history of heart disease?",
-        "Do you have diabetes?",
-        "Are you over 60 years old?",
-        "Do you smoke?"
-    ];
-    return questions[num - 1];
-}
 
 export default HealthQuiz;
