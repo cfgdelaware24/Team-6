@@ -11,52 +11,65 @@ const {
 
 const register = async (req, res) => {
     try {
-        console.log('Registration attempt:', req.body);
-        const { username, email, password } = req.body;
-  
-      // Check if username or email already exists
-      const existingUser = await findUserByUsername(username);
-      if (existingUser) {
-        return res.status(400).json({ error: "Username already exists" });
-      }
-  
-      const existingEmail = await findUserByEmail(email);
-      if (existingEmail) {
-        return res.status(400).json({ error: "Email already exists" });
-      }
-  
-      // Create new user
-      const newUser = await createUser(username, email, password);
-  
-      res.status(201).json({ message: "User registered successfully", userId: newUser.id });
+        const { username, email, password, role, name, age, phone } = req.body;
+
+        if (!username || !email || !password || !role || !name || !age || !phone) {
+            return res.status(400).json({ error: 'All fields are required.' });
+        }
+
+        // Hash the password before storing it
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Create new user
+        const newUser = await createUser(username, email, hashedPassword, role, name, age, phone);
+
+        res.status(201).json({ message: 'User registered successfully', userId: newUser.user_id });
     } catch (error) {
-      console.error('Registration error:', error.message, error.stack);
-      res.status(500).json({ error: "An error occurred during registration" });
+        console.error('Registration error:', error.message, error.stack);
+        res.status(500).json({ error: 'An error occurred during registration' });
     }
-  };
+};
+
+
+
+
 
 const login = async (req, res) => {
     const { username, password } = req.body;
     try {
         const user = await findUserByUsername(username);
-        if (user && (await bcrypt.compare(password, user.password))) {
-            const token = jwt.sign(
-                { userId: user.userID, username: user.username },
-                process.env.JWT_SECRET,
-                { expiresIn: "1h" }
-            );
-            res.status(200).json({ 
-                token, 
-                userId: user.userID, 
-                hasCompletedTopics: user.hasCompletedTopics
-            });
-        } else {
-            res.status(401).json({ error: "Invalid credentials" });
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
         }
+
+        // Correct password field name
+        const isPasswordMatch = await bcrypt.compare(password, user.password_hash);
+        if (!isPasswordMatch) {
+            return res.status(401).json({ error: "Invalid credentials" });
+        }
+
+        // Correct user ID field name
+        const token = jwt.sign(
+            { userId: user.user_id, username: user.username },
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
+        );
+
+        res.status(200).json({ 
+            token, 
+            userId: user.user_id, 
+            username: user.username,
+            role: user.role // Ensure the role is returned here
+        });
     } catch (error) {
+        console.error("Login error:", error.message, error.stack);
         res.status(500).json({ error: "Login failed" });
     }
 };
+
+
+
+
 
 const forgotPassword = async (req, res) => {
     const { username, newPassword, securityAnswer } = req.body;
@@ -112,7 +125,7 @@ const getRiskAssessmentResult = async (req, res) => {
     }
   };
 
-  const getUserDetails = async (req, res) => {
+  const getUserInformation = async (req, res) => {
     const { userId } = req.params;
     try {
         const userDetails = await getUserDetails(userId);
@@ -126,4 +139,4 @@ const getRiskAssessmentResult = async (req, res) => {
     }
 };
 
-module.exports = { register, login, forgotPassword, getUser, getRiskAssessmentResult, getUserDetails };
+module.exports = { register, login, forgotPassword, getUser, getRiskAssessmentResult, getUserInformation };

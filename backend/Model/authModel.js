@@ -9,18 +9,23 @@ const prisma = new PrismaClient({
     },
 });
 
-const createUser = async (username, email, password) => {
+const createUser = async (username, email, password, role, name, age, phone) => {
     return prisma.user.create({
         data: {
-        username,
-        email,
-        password_hash: password, 
-        name: username,
-        age: 0,  
-        phone: '' 
+            username,
+            email,
+            password_hash: password,
+            name,
+            age,
+            phone,
+            role
         },
     });
 };
+
+
+
+
 
 const findUserByUsername = async (username) => {
     return await prisma.user.findUnique({
