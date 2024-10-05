@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import './style.css';
 
 const Registration = () => {
@@ -19,11 +19,12 @@ const Registration = () => {
             if (isLogin) {
                 // Login
                 const response = await axios.post('http://localhost:3000/api/auth/login', { username, password });
-                const { token, userId } = response.data;
+                const { token, userId, role } = response.data;
                 localStorage.setItem('token', token);
                 localStorage.setItem('userId', userId);
+                localStorage.setItem('role', role);
                 // Redirect to quiz page after successful login
-                navigate('/quiz');
+                navigate('/thorough-quiz');
             } else {
                 // Register
                 const response = await axios.post('http://localhost:3000/api/auth/register', { username, email, password });
@@ -89,10 +90,6 @@ const Registration = () => {
                     >
                         {isLogin ? 'Create Account' : 'Log in'}
                     </button>
-                </div>
-                <div className="mission-statement">
-                    <h2 className="section-title">Mission Statement</h2>
-                    <p>One in 300 youth has an undetected heart condition that puts them at risk for SCA. By providing screenings, we aim to improve survival from sudden cardiac arrest by educating the community on the importance and simplicity of bystander CPR.</p>
                 </div>
             </div>
         </div>
