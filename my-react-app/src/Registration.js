@@ -5,7 +5,7 @@ const Registration = () => {
     return (
         <div className="container">
         <header>
-            <img src={'./image1.jpeg'} alt="Heart in the Game" className="logo"/>
+            <img src="./image1.jpeg" alt="Heart in the Game" className="logo"/>
         </header>
         <div className="content">
             <div className="login">
