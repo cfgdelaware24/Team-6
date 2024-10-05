@@ -8,6 +8,7 @@ const HealthQuiz = () => {
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState([]);
     const [result, setResult] = useState(null);
+    const [showModal, setShowModal] = useState(false); // State to control the modal visibility
     const userId = localStorage.getItem('userId'); // Fetch user ID from local storage to include in submissions
 
     useEffect(() => {
@@ -32,42 +33,26 @@ const HealthQuiz = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
-        // Ensure userId is fetched correctly before submission
-        const userId = localStorage.getItem('userId');
+
         if (!userId) {
             console.error('User ID is not available in local storage');
             return;
         }
-    
+
         try {
             const response = await axios.post('http://localhost:3000/api/risk-assessment/submit', {
-                userId: parseInt(userId),  // Convert to integer if it's stored as a string
+                userId: parseInt(userId), // Convert to integer if it's stored as a string
                 answers,
             });
             setResult(response.data); // Store the risk assessment result and advice
+            setShowModal(true); // Show the modal when results are ready
         } catch (error) {
             console.error('Error submitting assessment:', error);
         }
     };
-    
-    
 
-    const renderResults = () => {
-        if (!result) return null;
-
-        if (result.assessment === 'good') {
-            return <ResultsHealthy />;
-        } else {
-            return (
-                <div className="result-container">
-                    <h2>Your Risk Assessment Result</h2>
-                    <p><strong>Risk Level:</strong> {result.assessment}</p>
-                    <p><strong>Risk Percentage:</strong> {result.riskPercentage}%</p>
-                    <div dangerouslySetInnerHTML={{ __html: result.advice }}></div>
-                </div>
-            );
-        }
+    const closeModal = () => {
+        setShowModal(false);
     };
 
     return (
@@ -101,7 +86,31 @@ const HealthQuiz = () => {
                 ))}
                 <button type="submit" className="submit-btn">Submit</button>
             </form>
-            {renderResults()}
+
+            {showModal && (
+                <div className="modal-overlay">
+                    <div className="modal-content">
+                        <button className="close-modal" onClick={closeModal}>X</button>
+                        {result && (
+                            <>
+                                {result.assessment === 'good' ? (
+                                    <ResultsHealthy />
+                                ) : (
+                                    <div className="result-container">
+                                        <h2>Your Risk Assessment Result</h2>
+                                        <p><strong>Risk Level:</strong> {result.assessment}</p>
+                                        <p><strong>Risk Percentage:</strong> {result.riskPercentage}%</p>
+                                        <div className="advice-section">
+                                            <h3>Advice</h3>
+                                            <div dangerouslySetInnerHTML={{ __html: result.advice }}></div>
+                                        </div>
+                                    </div>
+                                )}
+                            </>
+                        )}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

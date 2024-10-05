@@ -113,3 +113,40 @@ header {
   width: 50px;
   height: 50px;
 }
+
+/* Updated parts of style.css */
+.container {
+    max-width: 500px; /* Reduced max-width for smaller devices */
+    margin: 20px auto; /* Reduced margin for better positioning */
+    padding: 20px; /* Reduced padding to avoid overflow */
+}
+
+.logo {
+    width: 120px; /* Reduced size for better fit */
+}
+
+.content {
+    padding: 20px; /* Reduced padding */
+}
+
+.input-group {
+    margin-bottom: 15px; /* Reduced margin for better spacing */
+}
+
+.btn-login, .btn-create-account {
+    width: 100%;
+    padding: 10px; /* Reduced padding for smaller screens */
+    font-size: 1em; /* Reduced font size slightly for consistency */
+    margin-top: 10px; /* Added margin to ensure better spacing between elements */
+}
+
+@media (max-width: 500px) {
+    .container {
+        width: 90%;
+        padding: 10px; /* Reduced padding for small devices */
+    }
+
+    .btn-login, .btn-create-account {
+        padding: 8px; /* Further reduced padding for smaller devices */
+    }
+}
