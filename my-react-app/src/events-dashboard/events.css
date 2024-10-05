@@ -1,0 +1,166 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 700;
+    color: #333;
+    font-size: 2em;
+}
+
+.calendar-container {
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+}
+
+.calendar {
+    flex-basis: 48%;
+    background-color: #ffdddd;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid #d9534f;
+    max-height: 500px;
+    overflow: hidden;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-header h2 {
+    font-size: 1.6em;
+    font-weight: 700;
+    color: #d9534f;
+}
+
+.calendar-header button {
+    background-color: #d9534f;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.calendar-header button:hover {
+    background-color: #c9302c;
+}
+
+.calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.calendar-table th, .calendar-table td {
+    width: 14%;
+    padding: 15px;
+    text-align: center;
+    font-size: 1em;
+    color: #333;
+    border: 1px solid #e0e0e0;
+}
+
+.calendar-table th {
+    background-color: #d9534f;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.event-days {
+    background-color: #c9302c;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.event-days:hover {
+    background-color: #b52a25;
+}
+
+.event-details {
+    flex-basis: 48%;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+}
+
+.event-card {
+    background-color: #ffdddd;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.event-card h3 {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #c9302c;
+    margin-bottom: 10px;
+}
+
+.event-card p {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.event-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.event-actions button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.register-button {
+    background-color: #28a745;
+    color: #ffffff;
+}
+
+.register-button:hover {
+    background-color: #218838;
+}
+
+.cancel-button {
+    background-color: #d9534f;
+    color: #ffffff;
+}
+
+.cancel-button:hover {
+    background-color: #c9302c;
+}
