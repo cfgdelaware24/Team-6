@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 import './style.css';
 import firstQuiz from './firstQuiz.jsx'
 import EventsDashboard from './events-dashboard/eventsdash';
@@ -12,7 +11,6 @@ const Registration = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const history = useHistory();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
