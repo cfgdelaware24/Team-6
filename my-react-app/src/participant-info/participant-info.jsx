@@ -1,32 +1,43 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './participant-info.css';
 
-const userId = localStorage.getItem('userId')
-
 function InformationDashboard() {
+    const [userInfo, setUserInfo] = useState(null);
+    const userId = localStorage.getItem('userId');
+
+    useEffect(() => {
+        if (userId) {
+            fetchUserDetails();
+        }
+    }, [userId]);
+
+    const fetchUserDetails = async () => {
+        try {
+            const response = await axios.get(`/api/auth/details/${userId}`);
+            setUserInfo(response.data);
+        } catch (error) {
+            console.error('Error fetching user details:', error);
+        }
+    };
+
+    if (!userInfo) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div className="container">
             <h1>Information</h1>
             <div className="info-grid">
                 <div className="box personal-info">
                     <h2>Personal Information</h2>
-                    <p>Name: John Doe <span className="edit">Edit</span></p>
-                    <p>Email: address@gmail.com</p>
-                    <p>Phone Number: 000-000-0000</p>
-                    <p>Address: 12345 Rock Street, MD, 20850</p>
+                    <p>Name: {userInfo.name} <span className="edit">Edit</span></p>
+                    <p>Email: {userInfo.email}</p>
+                    <p>Phone Number: {userInfo.phone || 'Not provided'}</p>
                 </div>
                 <div className="box participant-info">
                     <h2>Participant Info</h2>
-                    <p>EKG Status: YES/NO</p>
-                    <p>Participant ID: {userId}</p>
-                    <p>Volunteer ID: {userId}</p>
-                </div>
-                <div className="box test-results">
-                    <h2>Test Results</h2>
-                    <div className="result-box">
-                        <p className="status">At Risk/Danger</p>
-                        <p className="note">If you would like a more accurate test, <a href="#" className="link">click here for another test</a></p>
-                    </div>
+                    <p>Participant ID: {userInfo.Participant[0]?.participant_id || 'Not assigned'}</p>
                 </div>
             </div>
         </div>
