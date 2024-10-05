@@ -59,11 +59,33 @@ const getAllUsers = async () => {
     });
 };
 
+const getUserDetails = async (userId) => {
+    return await prisma.user.findUnique({
+        where: { userId: parseInt(userId) },
+        select: {
+            name: true,
+            email: true,
+            phone: true,
+            Participant: {
+                select: {
+                    participant_id: true
+                }
+            },
+            Volunteer: {
+                select: {
+                    volunteer_id: true
+                }
+            }
+        },
+    });
+};
+
 module.exports = {
     createUser,
     findUserByUsername,
     findUserByEmail,
     updateUserPasswordByUsername,
     getUserById,
-    getAllUsers
+    getAllUsers,
+    getUserDetails
 };
