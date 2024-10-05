@@ -9,31 +9,30 @@ const {
 } = require("../Model/authModel");
 
 const register = async (req, res) => {
-    const { username, email, password, securityAnswer } = req.body;
-
     try {
-        const existingUser = await findUserByUsername(username);
-        if (existingUser) {
-            return res.status(400).json({ error: "Username already exists" });
-        }
-
-        const existingEmail = await findUserByEmail(email);
-        if (existingEmail) {
-            return res.status(400).json({ error: "Email already exists" });
-        }
-
-        if (!username || !email || !password || !securityAnswer) {
-            return res.status(400).json({ error: "Missing required fields" });
-        }
-
-        const user = await createUser(username, email, password, securityAnswer);
-
-        res.status(201).json({ message: "User registered successfully", userId: user.userID });
+        console.log('Registration attempt:', req.body);
+        const { username, email, password } = req.body;
+  
+      // Check if username or email already exists
+      const existingUser = await findUserByUsername(username);
+      if (existingUser) {
+        return res.status(400).json({ error: "Username already exists" });
+      }
+  
+      const existingEmail = await findUserByEmail(email);
+      if (existingEmail) {
+        return res.status(400).json({ error: "Email already exists" });
+      }
+  
+      // Create new user
+      const newUser = await createUser(username, email, password);
+  
+      res.status(201).json({ message: "User registered successfully", userId: newUser.id });
     } catch (error) {
-        console.error("User register error:", error);
-        res.status(500).json({ error: "User registration failed" });
+      console.error('Registration error:', error.message, error.stack);
+      res.status(500).json({ error: "An error occurred during registration" });
     }
-};
+  };
 
 const login = async (req, res) => {
     const { username, password } = req.body;
@@ -112,4 +111,4 @@ const getRiskAssessmentResult = async (req, res) => {
     }
   };
 
-module.exports = { register, login, forgotPassword, saveTopics, getTopics, getUser, getRiskAssessmentResult };
+module.exports = { register, login, forgotPassword, getUser, getRiskAssessmentResult };
