@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './style.css';
 
+
 const Registration = () => {
     const [isLogin, setIsLogin] = useState(true);
     const [username, setUsername] = useState('');
@@ -32,9 +33,7 @@ const Registration = () => {
 
     return (
         <div className="container">
-            <header>
-                <img src={'./image1.jpeg'} alt="Heart in the Game" className="logo"/>
-            </header>
+        
             <div className="content">
                 <div className="login">
                     <h2 className="section-title">{isLogin ? 'Login' : 'Create Account'}</h2>
