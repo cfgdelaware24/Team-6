@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>Health Quiz Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: #e0e0e0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .quiz-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 20px;
+        }
+
+        .question-box {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #dcdcdc;
+        }
+
+        .question-box p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .submit-button {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            padding: 15px;
+            background-color: #d9534f;
+            color: #fff;
+            text-align: center;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #ba171a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Take Quiz Here</h1>
+        <div class="quiz-grid">
+            <div class="question-box">
+                <p>1. Have you ever had your blood pressure measured, and do you know if it was high or low?</p>
+                <input type="text" placeholder="Your answer here...">
+
+                <p>2. When was the last time your diastolic blood pressure (the bottom number) was checked?</p>
+                <input type="text" placeholder="Your answer here...">
+
+                <p>3. Do you ever feel like your heart is racing or beating irregularly?</p>
+                <input type="text" placeholder="Your answer here...">
+
+                <p>4. Do you ever find yourself breathing faster or slower than normal?</p>
+                <input type="text" placeholder="Your answer here...">
+
+                <p>5. Have you ever experienced feeling very cold or having chills after a medical event, like chest pain or a heart problem?</p>
+                <input type="text" placeholder="Your answer here...">
+
+                <p>6. Have you ever had your oxygen levels measured?</p>
+                <input type="text" placeholder="Your answer here...">
+
+                <p>7. Has your doctor discussed how your age might affect your heart health or recovery after a heart event?</p>
+                <input type="text" placeholder="Your answer here...">
+
+                <p>8. Did your doctor mention if your symptoms could differ because of your gender, especially related to heart problems?</p>
+                <input type="text" placeholder="Your answer here...">
+
+                <p>9. After any medical treatment, did your doctor talk about how they checked your awareness and brain function?</p>
+                <input type="text" placeholder="Your answer here...">
+
+                <p>10. Have your sodium levels been checked recently, especially if you’ve been in the hospital for heart-related problems?</p>
+                <input type="text" placeholder="Your answer here...">
+
+            </div>
+            <div class="question-box">
+
+                <p>11. Have you ever been told that your potassium levels were too high or low?</p>
+                <input type="text" placeholder="Your answer here...">
+
+                <p>12. Have you ever been told that your chloride levels were abnormal during any of your medical visits?</p>
+                <input type="text" placeholder="Your answer here...">
+
+                <p>13. Has your doctor ever discussed your urea levels with you?</p>
+                <input type="text" placeholder="Your answer here...">
+
+                <p>14. Have you had your creatinine levels checked, especially after experiencing a heart problem?</p>
+                <input type="text" placeholder="Your answer here...">
+
+                <p>15. How often do you drink alcohol, and has your doctor advised you about how this might affect your heart health?</p>
+                <input type="text" placeholder="Your answer here...">
+
+                <p>16. Do you currently smoke, or have you smoked in the past?</p>
+                <input type="text" placeholder="Your answer here...">
+
+                <p>17. Do you have any close family members who have had heart attacks or other heart problems?</p>
+                <input type="text" placeholder="Your answer here...">
+
+                <p>18. When you arrived at the hospital, did the doctors explain how they determined the urgency of your condition?</p>
+                <input type="text" placeholder="Your answer here...">
+
+                <p>19. After receiving care for your heart problem, did your doctor discuss your recovery and what you should expect in the coming weeks or months?</p>
+                <input type="text" placeholder="Your answer here...">
+            </div>
+        </div>
+        <button class="submit-button">Submit</button>
+    </div>
+</body>
+</html>

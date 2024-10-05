@@ -4,27 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Login</title>
+    <title>Heart in the Game</title>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <img src="logo.png" alt="Heart in the Game Logo" class="logo">
-        </div>
-        <div class="content">
-            <div class="login-box">
-                <h2>Login</h2>
-                <form>
-                    <input type="email" placeholder="enter email" required>
-                    <input type="password" placeholder="password" required>
-                    <button type="submit">Log in</button>
-                    <p>OR</p>
-                    <button type="button">Create Account</button>
-                </form>
-            </div>
-            <div class="mission-statement">
-                <h2>Mission Statement</h2>
-                <p>One in 300 youth has an undetected heart condition that puts them at risk for SCA. By providing screenings, we aim to improve survival from sudden cardiac arrest by educating the community on the importance and simplicity of bystander CPR.</p>
+        <div class="container">
+            <header>
+                <img src="image1.jpeg" alt="Heart in the Game" class="logo">
+            </header>
+            <div class="content">
+                <div class="login">
+                    <h2 class="section-title">Login</h2>
+                    <form>
+                        <div class="input-group">
+                            <label for="email" class="form-label">Enter Email</label>
+                            <input type="email" id="email" class="form-input" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" id="password" class="form-input" required>
+                        </div>
+                        <button type="submit" class="btn-login">Log in</button>
+                    </form>
+                    <p class="or-text">OR</p>
+                    <button class="btn-create-account">Create Account</button>
+                </div>
+                <div class="mission-statement">
+                    <h2 class="section-title">Mission Statement</h2>
+                    <p>One in 300 youth has an undetected heart condition that puts them at risk for SCA. By providing screenings, we aim to improve survival from sudden cardiac arrest by educating the community on the importance and simplicity of bystander CPR.</p>
             </div>
         </div>
     </div>
