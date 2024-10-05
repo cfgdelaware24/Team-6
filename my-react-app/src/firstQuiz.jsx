@@ -6,7 +6,7 @@ const HealthQuiz = () => {
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState([]);
     const [result, setResult] = useState(null);
-    const userId = 'user-id-here'; // query userID from db, NEED TO CHANGE
+    const userId = localStorage.getItem('userId')
 
     useEffect(() => {
         fetchQuestions();
@@ -14,7 +14,7 @@ const HealthQuiz = () => {
 
     const fetchQuestions = async () => {
         try {
-            const response = await axios.get('/api/risk-assessment');
+            const response = await axios.get('/api/risk-assessment/questions');
             setQuestions(response.data);
             setAnswers(new Array(response.data.length).fill(false));
         } catch (error) {
@@ -69,7 +69,7 @@ const HealthQuiz = () => {
                 ))}
                 <button type="submit" className="submit-btn">Submit</button>
             </form>
-            {result && (
+            {/* {result && (
                 <div className="result">
                     <h2>Assessment Result</h2>
                     <p>Risk Level: {result.assessment}</p>
@@ -77,7 +77,7 @@ const HealthQuiz = () => {
                     <p>EKG Recommendation: {result.ekgRecommendation}</p>
                     <div dangerouslySetInnerHTML={{ __html: result.advice }} />
                 </div>
-            )}
+            )} */}
         </div>
     );
 };
