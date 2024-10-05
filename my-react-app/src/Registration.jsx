@@ -51,9 +51,6 @@ const Registration = () => {
 
     return (
         <div className="container">
-            <header>
-                <img src={'../image1.jpeg'} alt="Heart in the Game" className="logo" />
-            </header>
             <div className="content">
                 <div className="login">
                     <h2 className="section-title">{isLogin ? 'Login' : 'Create Account'}</h2>
@@ -139,14 +136,13 @@ const Registration = () => {
                         <button type="submit" className={isLogin ? "btn-login" : "btn-create-account"}>
                             {isLogin ? 'Log in' : 'Create Account'}
                         </button>
-                    </form>
-                    <p className="or-text">OR</p>
-                    <button
+                        <button
                         onClick={() => setIsLogin(!isLogin)}
                         className={isLogin ? "btn-create-account" : "btn-login"}
                     >
                         {isLogin ? 'Create Account' : 'Log in'}
                     </button>
+                    </form>  
                 </div>
                 <div className="mission-statement">
                     <h2 className="section-title">Mission Statement</h2>
