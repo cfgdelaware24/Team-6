@@ -3,13 +3,13 @@
 import React from 'react';
 import './results.css'; // Import your CSS file
 
-function Results() {
+function Results(result) {
     return (
         <div className="container">
             <div className="results-box">
                 <h2>Results</h2>
                 <p className="result-status">
-                    Based on your results, you are <span className="at-risk">AT RISK/DANGER</span>
+                    Based on your results, you are <span className="at-risk">{result}</span>
                 </p>
                 <img src="image1.jpeg" alt="Heart in the Game" className="logo" />
                 <p className="suggestion">We suggest you take an <strong>EKG</strong> test based on your results</p>
