@@ -1,5 +1,6 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const { getRiskAssessmentQuestions, saveRiskAssessmentResult } = require("../Model/authModel");
+const { getRiskAssessmentQuestions, saveRiskAssessmentResult } = require("../Model/chatModel");
+const { getUserById } = require('../Model/authModel')
 require('dotenv').config();
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -17,7 +18,7 @@ const getRiskAssessment = async (req, res) => {
 const submitRiskAssessment = async (req, res) => {
     const { userId, answers } = req.body;
     
-    if (!userId || !answers || !Array.isArray(answers)) {
+    if (!answers || !Array.isArray(answers)) {
       return res.status(400).json({ error: "Invalid risk assessment submission" });
     }
   
@@ -72,5 +73,19 @@ const submitRiskAssessment = async (req, res) => {
         res.status(500).json({ error: "Failed to process risk assessment submission" });
     }
 };
-  
-  module.exports = { getRiskAssessment, submitRiskAssessment };
+
+const getRiskAssessmentResult = async (req, res) => {
+    const { userId } = req.params;
+    try {
+        const user = await getUserById(userId);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        res.status(200).json({ riskAssessmentResult: user.riskAssessmentResult });
+    } catch (error) {
+        console.error('Failed to retrieve risk assessment result:', error);
+        res.status(500).json({ error: 'Failed to retrieve risk assessment result' });
+    }
+};
+
+module.exports = { getRiskAssessment, submitRiskAssessment, getRiskAssessmentResult };
