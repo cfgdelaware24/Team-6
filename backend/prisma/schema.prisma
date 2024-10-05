@@ -21,21 +21,8 @@ model User {
   age           Int
   email         String      @unique
   phone         String
-  Participant   Participant[]
-  Volunteer     Volunteer[]
+  role          String
   riskAssessmentResult String?
-}
-
-model Participant {
-  participant_id Int   @id @default(autoincrement())
-  user_id        Int
-  user           User? @relation(fields: [user_id], references: [user_id])
-}
-
-model Volunteer {
-  volunteer_id Int   @id @default(autoincrement())
-  user_id      Int
-  user         User? @relation(fields: [user_id], references: [user_id])
 }
 
 model Event {
