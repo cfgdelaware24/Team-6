@@ -45,7 +45,7 @@ body {
 }
 
 .at-risk {
-    color: #ffcc00; 
+    color: #28a745; 
 }
 
 .logo {
@@ -59,4 +59,22 @@ body {
     font-size: 1.1em;
     color: #ffffff;
     margin-top: 10px;
+}
+.info-button {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #ba171a;
+    padding: 10px 20px;
+    font-weight: 600;
+    border: 2px solid #ba171a; 
+    border-radius: 8px;
+    margin-top: 20px; 
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    text-decoration: none;
+}
+
+.info-button:hover {
+    background-color: #ba171a;
+    color: #ffffff;
 }
