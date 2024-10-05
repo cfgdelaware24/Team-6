@@ -9,11 +9,16 @@ const prisma = new PrismaClient({
     },
 });
 
-const createUser = async (username, email, password, securityAnswer) => {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const hashedSecurityAnswer = await bcrypt.hash(securityAnswer, 10);
-    return await prisma.user.create({
-        data: { username, email, password: hashedPassword, securityAnswer: hashedSecurityAnswer },
+const createUser = async (username, email, password) => {
+    return prisma.user.create({
+        data: {
+        username,
+        email,
+        password_hash: password, 
+        name: username,
+        age: 0,  
+        phone: '' 
+        },
     });
 };
 
@@ -59,8 +64,6 @@ module.exports = {
     findUserByUsername,
     findUserByEmail,
     updateUserPasswordByUsername,
-    updateUserTopics,
     getUserById,
-    getAllUsers,
-    saveRiskAssessmentResult
+    getAllUsers
 };
