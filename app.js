@@ -1,8 +1,13 @@
 const express = require('express');
-const CardiacArrestPrediction = require('./CardiacArrestPredictionModel/CardiacArrestPredictor.js');
+const controllers = require('./src/controllers');
+var bodyParser = require('body-parser');
+
+var jsonParser = bodyParser.json();
 
 const app = express();
 const port = 3000;
+require('dotenv').config();
+
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -25,6 +30,7 @@ app.post('/predict', async (req, res) => {
   }
 });
 
+app.post('/event', jsonParser, controllers.createEvent);
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
