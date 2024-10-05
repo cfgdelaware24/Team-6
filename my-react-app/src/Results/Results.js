@@ -2,7 +2,7 @@ import React from 'react';
 import './results.css'; 
 import { useNavigate } from 'react-router-dom';
 
-function Results(result) {
+function Results() {
     const navigate = useNavigate();
 
     return (
@@ -10,7 +10,7 @@ function Results(result) {
             <div className="results-box">
                 <h2>Results</h2>
                 <p className="result-status">
-                    Based on your results, you are <span className="at-risk">at risk</span>
+                    Based on your results, you are <span className="at-risk">AT RISK</span>
                 </p>
                 <img src="image1.jpeg" alt="Heart in the Game" className="logo" />
                 <p className="suggestion">We suggest you take an <strong>EKG</strong> test based on your results</p>

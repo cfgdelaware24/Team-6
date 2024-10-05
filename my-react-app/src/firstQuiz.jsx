@@ -45,9 +45,9 @@ const HealthQuiz = () => {
         if (!result) return null;
 
         if (result.assessment === "good") {
-            return <Resultshealthy result={"at risk"} />;
+            return <Resultshealthy/>;
         } else {
-            return <Results result={"healthy"} />;
+            return <Results/>;
         }
     };
 
