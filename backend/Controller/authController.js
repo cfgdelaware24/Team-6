@@ -5,7 +5,8 @@ const {
     findUserByUsername,
     findUserByEmail,
     updateUserPasswordByUsername,
-    getUserById
+    getUserById,
+    getUserDetails
 } = require("../Model/authModel");
 
 const register = async (req, res) => {
@@ -111,4 +112,18 @@ const getRiskAssessmentResult = async (req, res) => {
     }
   };
 
-module.exports = { register, login, forgotPassword, getUser, getRiskAssessmentResult };
+  const getUserDetails = async (req, res) => {
+    const { userId } = req.params;
+    try {
+        const userDetails = await getUserDetails(userId);
+        if (!userDetails) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        res.status(200).json(userDetails);
+    } catch (error) {
+        console.error('Failed to retrieve user details:', error);
+        res.status(500).json({ error: 'Failed to retrieve user details' });
+    }
+};
+
+module.exports = { register, login, forgotPassword, getUser, getRiskAssessmentResult, getUserDetails };
