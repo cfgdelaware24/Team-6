@@ -28,6 +28,7 @@ app.use((req, res, next) => {
   res.status(404).send("Sorry, that route doesn't exist.");
 });
 
+app.post('/event', jsonParser, controllers.createEvent);
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
