@@ -6,9 +6,17 @@ const getRiskAssessmentQuestions = async () => {
 };
 
 const saveRiskAssessmentResult = async (userId, result) => {
+    if (!userId || isNaN(userId)) {
+        throw new Error('Invalid userId');
+    }
+
     return await prisma.user.update({
-        where: { userID: parseInt(userId) },
-        data: { riskAssessmentResult: result },
+        where: {
+            user_id: parseInt(userId), // Correct field name and ensure it is an integer
+        },
+        data: {
+            riskAssessmentResult: result,
+        },
     });
 };
 

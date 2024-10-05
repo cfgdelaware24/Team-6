@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/chat', chatRoutes);
+app.use('/api/risk-assessment', chatRoutes);
 
 // Basic route
 app.get('/', (req, res) => {

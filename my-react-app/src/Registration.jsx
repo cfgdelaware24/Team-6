@@ -26,10 +26,7 @@ const Registration = () => {
                 // Login
                 const response = await axios.post('http://localhost:3000/api/auth/login', { username, password });
                 console.log('Login successful', response.data);
-                setIsLoggedIn(true);
-                setRole(response.data.role); // Make sure role is correctly set from response
-    
-                // Navigate based on role
+                localStorage.setItem('userId', response.data.userId); // Save userId to local storage
                 if (response.data.role === 'participant') {
                     navigate('/firstquiz');
                 } else if (response.data.role === 'volunteer') {
@@ -49,6 +46,7 @@ const Registration = () => {
             setError(err.response?.data?.error || 'An error occurred');
         }
     };
+    
     
 
     return (
