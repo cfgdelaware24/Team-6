@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './firstquiz.css';
+import Results from './Results/Results';
+import Resultshealthy from '.Results/Resultshealthy'
 
 const HealthQuiz = () => {
     const [questions, setQuestions] = useState([]);
@@ -31,10 +33,21 @@ const HealthQuiz = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api/risk-assessment', { userId, answers });
+            const response = await axios.post('/api/questions', { userId, answers });
             setResult(response.data);
+            renderResults()
         } catch (error) {
             console.error('Error submitting assessment:', error);
+        }
+    };
+
+    const renderResults = () => {
+        if (!result) return null;
+
+        if (result.assessment === "good") {
+            return <Resultshealthy result={result} />;
+        } else {
+            return <Results result={result} />;
         }
     };
 
@@ -69,15 +82,6 @@ const HealthQuiz = () => {
                 ))}
                 <button type="submit" className="submit-btn">Submit</button>
             </form>
-            {/* {result && (
-                <div className="result">
-                    <h2>Assessment Result</h2>
-                    <p>Risk Level: {result.assessment}</p>
-                    <p>Risk Percentage: {result.riskPercentage}%</p>
-                    <p>EKG Recommendation: {result.ekgRecommendation}</p>
-                    <div dangerouslySetInnerHTML={{ __html: result.advice }} />
-                </div>
-            )} */}
         </div>
     );
 };
